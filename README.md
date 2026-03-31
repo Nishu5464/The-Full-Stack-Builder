@@ -12,7 +12,7 @@ This project demonstrates end-to-end development including UI, API integration, 
 * ✅ Task dependency/blocking system
 * ✅ REST API integration
 * ✅ Clean and responsive Flutter UI
-* ✅ Backend with FastAPI and SQLite database
+* ✅ Backend powered by FastAPI with SQLite
 
 ---
 
@@ -36,17 +36,26 @@ This project demonstrates end-to-end development including UI, API integration, 
 
 ```
 The-Full-Stack-Builder_N/
- ├── backend/
- ├── frontend/
- ├── README.md
- ├── .gitignore
+│── backend/
+│── frontend/
+│── README.md
+│── .gitignore
 ```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 🔹 Backend Setup
+### 🔹 1. Clone the Repository
+
+```bash
+git clone https://github.com/Nishu5464/The-Full-Stack-Builder_N.git
+cd The-Full-Stack-Builder_N
+```
+
+---
+
+### 🔹 2. Backend Setup
 
 ```bash
 cd backend
@@ -56,42 +65,47 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
+👉 Backend runs on:
+http://127.0.0.1:8000
+
+👉 API Docs:
+http://127.0.0.1:8000/docs
+
 ---
 
-### 🔹 Frontend Setup
+### 🔹 3. Frontend Setup
 
 ```bash
 cd frontend
 flutter pub get
-flutter run
+flutter run -d chrome
 ```
 
 ---
 
 ## 🌐 API Endpoint
 
-```
 http://127.0.0.1:8000
-```
 
 ---
 
 ## 📸 Screenshots
 
-(Add your screenshots here using paths like below)
+(Add your screenshots here)
 
-```md
-![Home Screen](assets/screenshots/home.png)
-![Add Task](assets/screenshots/add_task.png)
-![Task List](assets/screenshots/list.png)
+```
+assets/screenshots/home.png
+assets/screenshots/add_task.png
+assets/screenshots/list.png
 ```
 
 ---
 
 ## 🎯 Track & Stretch Goal
 
-* **Track Chosen:** Track A (Full Stack Development)
-* **Stretch Goal:** Improvements
+* **Track Chosen:** Track A (Full-Stack Builder)
+* **Stretch Goal Implemented:**
+  Task status management and dependency/blocking system
 
 ---
 
@@ -99,12 +113,12 @@ http://127.0.0.1:8000
 
 AI tools (ChatGPT) were used for:
 
-* Debugging errors and fixing issues
-* Improving project structure
-* Writing and optimizing README
-* UI improvement suggestions
+* Debugging errors and resolving integration issues
+* Improving project structure and API handling
+* Enhancing UI/UX suggestions
+* Assisting in writing and refining documentation
 
-All implementation, understanding, and logic building were done independently.
+All core logic, implementation, and understanding were developed independently.
 
 ---
 
@@ -113,7 +127,7 @@ All implementation, understanding, and logic building were done independently.
 * 🌐 Deploy backend and frontend
 * 🔐 Add authentication (login/signup)
 * 📊 Add analytics/dashboard
-* 🎨 Enhance UI/UX
+* 🎨 Improve UI/UX further
 
 ---
 
@@ -121,8 +135,8 @@ All implementation, understanding, and logic building were done independently.
 
 **Nishant Pandey**
 
-* LinkedIn: https://www.linkedin.com/in/nishant-pandey-538101201
-* GitHub: https://github.com/Nishu5464
+* 🔗 LinkedIn: https://www.linkedin.com/in/nishant-pandey-538101201
+* 💻 GitHub: https://github.com/Nishu5464
 
 ---
 
