@@ -5,66 +5,66 @@ import '../models/task.dart';
 class ApiService {
   static const String baseUrl = "http://localhost:8000";
 
-  // GET TASKS
+  // ✅ GET TASKS (with timeout + safe handling)
   static Future<List<Task>> fetchTasks() async {
-    final res = await http.get(Uri.parse("$baseUrl/tasks"));
+    try {
+      final res = await http
+          .get(Uri.parse("$baseUrl/tasks"))
+          .timeout(const Duration(seconds: 5));
 
-    print("GET STATUS: ${res.statusCode}");
-    print("GET BODY: ${res.body}");
+      print("GET STATUS: ${res.statusCode}");
 
-    if (res.statusCode == 200) {
-      final List data = jsonDecode(res.body);
-      return data.map((e) => Task.fromJson(e)).toList();
-    } else {
-      throw Exception("Failed to load tasks");
+      if (res.statusCode == 200) {
+        final List data = jsonDecode(res.body);
+        return data.map((e) => Task.fromJson(e)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      print("FETCH ERROR: $e");
+      return [];
     }
   }
 
-  // ADD TASK
+  // ✅ ADD TASK
   static Future<void> addTask(Task task) async {
-    final res = await http.post(
-      Uri.parse("$baseUrl/tasks"),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(task.toJson()),
-    );
-
-    print("🔥 ADD STATUS: ${res.statusCode}");
-    print("🔥 ADD BODY: ${res.body}");
-
-    if (res.statusCode != 200 && res.statusCode != 201) {
-      throw Exception("Failed to add task");
+    try {
+      await http.post(
+        Uri.parse("$baseUrl/tasks"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(task.toJson()),
+      );
+    } catch (e) {
+      print("ADD ERROR: $e");
     }
   }
 
-  // UPDATE TASK
+  // ✅ UPDATE TASK
   static Future<void> updateTask(Task task) async {
-    if (task.id == null) {
-      throw Exception("Task ID is null");
-    }
-
-    final res = await http.put(
-      Uri.parse("$baseUrl/tasks/${task.id}"),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(task.toJson()),
-    );
-
-    print("🔥 UPDATE STATUS: ${res.statusCode}");
-    print("🔥 UPDATE BODY: ${res.body}");
-
-    if (res.statusCode != 200) {
-      throw Exception("Failed to update task");
+    try {
+      await http.put(
+        Uri.parse("$baseUrl/tasks/${task.id}"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(task.toJson()),
+      );
+    } catch (e) {
+      print("UPDATE ERROR: $e");
     }
   }
 
-  // DELETE TASK
-  static Future<void> deleteTask(int id) async {
-    final res =
-        await http.delete(Uri.parse("$baseUrl/tasks/$id"));
+  // ✅ DELETE TASK (fixed)
+  static Future<bool> deleteTask(int id) async {
+    try {
+      final res = await http
+          .delete(Uri.parse("$baseUrl/tasks/$id"))
+          .timeout(const Duration(seconds: 5));
 
-    print("DELETE STATUS: ${res.statusCode}");
+      print("DELETE STATUS: ${res.statusCode}");
 
-    if (res.statusCode != 200) {
-      throw Exception("Failed to delete task");
+      return res.statusCode == 200 || res.statusCode == 204;
+    } catch (e) {
+      print("DELETE ERROR: $e");
+      return false;
     }
   }
 }
